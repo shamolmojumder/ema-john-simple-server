@@ -17,17 +17,20 @@ app.use(cors());
 const port = 5000;
 
 
-
+app.get('/',(req,res)=>{
+  res.send("hello from ema server")
+})
 
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
   const products = client.db("emaJohnStore").collection("products");
   app.post('/addProduct',(req,res)=>{
     const product=req.body;
-    products.insertOne(product)
-    .then(result=>{
-      console.log(result);
-    })
+    console.log(product);
+    // products.insertOne(product)
+    // .then(result=>{
+    //   console.log(result);
+    // })
   })
 });
 
