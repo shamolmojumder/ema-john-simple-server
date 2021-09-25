@@ -27,10 +27,10 @@ client.connect(err => {
   app.post('/addProduct',(req,res)=>{
     const product=req.body;
     console.log(product);
-    // products.insertOne(product)
-    // .then(result=>{
-    //   console.log(result);
-    // })
+    products.insertOne(product)
+    .then(result=>{
+      console.log(result);
+    })
   })
 });
 
