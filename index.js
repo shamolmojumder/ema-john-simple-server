@@ -24,6 +24,7 @@ app.get('/',(req,res)=>{
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
   const productsCollection = client.db("emaJohnStore").collection("products");
+  const ordersCollection = client.db("emaJohnStore").collection("orders");
     app.post('/addProduct',(req,res)=>{
       const products=req.body;
       productsCollection.insertOne(products)
@@ -52,6 +53,15 @@ client.connect(err => {
       productsCollection.find({key:{$in:productsKeys}})
       .toArray((err,documents)=>{
         res.send(documents)
+      })
+    })
+
+    app.post('/addOrder',(req,res)=>{
+      const order=req.body;
+      ordersCollection.insertOne(order)
+      .then(result=>{
+        console.log("result.insertedCount");
+        res.send(result.insertedCount>0);
       })
     })
 
